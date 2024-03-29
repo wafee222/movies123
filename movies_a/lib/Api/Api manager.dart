@@ -86,12 +86,14 @@ class Api {
 
   // Search for movies based on a query string
   Future<List<Movie>> searchMovies(String query) async {
-    final response = await http.get(Uri.parse("$searchApiUrl&query=$query"));
+    final encodedQuery = Uri.encodeComponent(query); // Encode the query to handle special characters
+
+    final response = await http.get(Uri.parse("$searchApiUrl&query=$encodedQuery")); // Append the encoded query to the URL
 
     if (response.statusCode == 200) {
       final List<dynamic> data = json.decode(response.body)['results'];
 
-      List<Movie> movies = data.map((movie) => Movie.fromMap(movie)).toList();
+      List<Movie> movies = data.map((movie) => Movie.fromMap(movie)).toList(); // Assuming your Movie model has a fromMap constructor
       return movies;
     } else {
       throw Exception('Failed to search movies');

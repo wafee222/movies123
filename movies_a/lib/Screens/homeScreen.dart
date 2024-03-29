@@ -15,7 +15,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  int _selectedIndex = 0; // Index to track selected bottom navigation bar item
+  int selectedIndex = 0; // Index to track selected bottom navigation bar item
 
   late Future<List<Movie>> upcomingMovies; // Future for upcoming movies
   late Future<List<Movie>> popularMovies; // Future for popular movies
@@ -215,7 +215,7 @@ class _HomeScreenState extends State<HomeScreen> {
         backgroundColor: Colors.black12,
         selectedItemColor: Colors.yellow,
         unselectedItemColor: Colors.grey,
-        currentIndex: _selectedIndex,
+        currentIndex: selectedIndex,
         onTap: _onItemTapped,
         items: const [
           BottomNavigationBarItem(
@@ -241,7 +241,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   void _onItemTapped(int index) {
     setState(() {
-      _selectedIndex = index;
+      selectedIndex = index;
     });
 
     switch (index) {
